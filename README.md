@@ -6,7 +6,7 @@ Trustless authentication is also very useful for P2P applications where there is
 
 # How it works
 
-First the user converts their password to a secret key. From the secret key, they generate the public key. They public key is stored for each user by the server during sign up / password change, instead of a password hash. To authenticate a user, the server can send them a token for them to encrypt. The user should then encrypt the message using their password converted to a private key and send the encrypted message back to the server. The server can then check that the message was in fact encrypted by the private key that belongs to the public key that it knows and the user must therefore know the password. 
+First the user converts their password to a secret key. From the secret key, they generate the public key. The public key is stored for each user by the server during sign up / password change, instead of a password hash. To authenticate a user, the server can send them a token for them to encrypt. The user should then encrypt the message using their password converted to a private key and send the encrypted message back to the server. The server can then check that the message was in fact encrypted by the private key that belongs to the public key that it knows and the user must therefore know the password. 
 
 One cool thing someone might do is to use the current timestamp as the token. The server then wouldn't have to send the token to the user and the server wouldn't have to keep a list of active sessions.
 
