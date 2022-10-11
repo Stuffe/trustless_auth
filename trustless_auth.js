@@ -1,4 +1,4 @@
-const cryptic_auth = (function (undefined) {
+const trustless_auth = (function (undefined) {
 	let self = {};
 	// Sha256 implementation by: https://github.com/geraintluff/sha256
 	let sha256 = function sha256(ascii) {
@@ -252,7 +252,7 @@ const cryptic_auth = (function (undefined) {
 		return pub_k.x.toString(16)+","+pub_k.y.toString(16);
 	}
 
-	self.sign_message = function(secret_key, message){
+	self.encrypt_message = function(secret_key, message){
 		"use strict";
 		let digest_num = digest(message);
 		let random_num = new Uint16Array(32);
