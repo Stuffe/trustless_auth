@@ -1,0 +1,33 @@
+<div id="log_in_result"></div>
+
+<script src="bigint.js"></script>
+<script src="trustless_auth.js"></script>
+<script>
+
+// In the database of the server this key is stored with the username
+const user_public_key = "39a5184614c28f467533b1d1d93c7efbc91406b75ce9f2516a222ed467656794,5dc21f0657eb33719d3cc3b0db9c765a5991f38898d2827c57fc8e9abe1b0ac8";
+
+// In the users browser, we ask for their password at log in. The password is NEVER sent to the server.
+let password = prompt("Type the correct password to log in. (Hint its 'password123')", "password123");
+
+// The user regenerates their secret key from the password locally
+let secret_key = cryptic_auth.get_secret_key(password);
+
+// The server sends this token to the user
+let auth_token = "TOTALLY_RANDOM";
+
+// The user signs the token
+let signed_auth_token = cryptic_auth.sign_message(secret_key, auth_token);
+
+// The server authenticates said token
+let is_authentic = cryptic_auth.verify_message(user_public_key, auth_token, signed_auth_token);
+
+if(is_authentic){
+	document.getElementById("log_in_result").innerHTML = "You logged in!";
+}else{
+	document.getElementById("log_in_result").innerHTML = "Epic fail.";
+}
+
+// One thing you could do is to use the current timestamp as the token. The server then wouldn't have to send the token to the user and the server wouldn't have to keep a list of active sessions.
+
+</script>
